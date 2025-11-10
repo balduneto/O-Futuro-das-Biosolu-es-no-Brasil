@@ -93,22 +93,22 @@
             <div class="insight-box min-h-[250px] transition-all duration-300">
                 <div x-show="activeTab === 'pilar1'" x-transition:enter="transition-opacity duration-500" x-transition:leave="transition-opacity duration-300" class="space-y-4">
                     <h3 class="text-2xl font-bold text-emerald-400">Pilar 1: Bioinsumos (O Alicerce Atual)</h3>
-                    <p class="text-lg text-slate-200">Foco na substituição de insumos químicos na agricultura. Inclui biofungicidas, bioinseticidas e inoculantes.</p>
+                    <p class="text-base md:text-lg text-slate-200">Foco na substituição de insumos químicos na agricultura. Inclui biofungicidas, bioinseticidas e inoculantes.</p>
                     <p class="text-sm text-slate-400"><strong>Mercado:</strong> > US$ 3 Bilhões até 2030. O retorno econômico superior aos químicos impulsiona a adoção.</p>
                 </div>
                 <div x-show="activeTab === 'pilar2'" x-transition:enter="transition-opacity duration-500" x-transition:leave="transition-opacity duration-300" class="space-y-4">
                     <h3 class="text-2xl font-bold text-emerald-400">Pilar 2: Biocombustíveis Avançados (A Descarbonização)</h3>
-                    <p class="text-lg text-slate-200">Transição energética baseada em biomassa. Inclui Etanol de 2ª Geração (E2G), Combustível Sustentável de Aviação (SAF) e Biometano, convertendo resíduos em energia.</p>
+                    <p class="text-base md:text-lg text-slate-200">Transição energética baseada em biomassa. Inclui Etanol de 2ª Geração (E2G), Combustível Sustentável de Aviação (SAF) e Biometano, convertendo resíduos em energia.</p>
                     <p class="text-sm text-slate-400"><strong>Players-Chave:</strong> Raízen, Granbio, Petrobras, BBF.</p>
                 </div>
                 <div x-show="activeTab === 'pilar3'" x-transition:enter="transition-opacity duration-500" x-transition:leave="transition-opacity duration-300" class="space-y-4">
                     <h3 class="text-2xl font-bold text-emerald-400">Pilar 3: Bioplásticos e Bioquímicos (A Substituição do Petróleo)</h3>
-                    <p class="text-lg text-slate-200">Utiliza a fermentação de biomassa para criar polímeros biodegradáveis (como PHA e PLA) que substituem plásticos de origem fóssil.</p>
+                    <p class="text-base md:text-lg text-slate-200">Utiliza a fermentação de biomassa para criar polímeros biodegradáveis (como PHA e PLA) que substituem plásticos de origem fóssil.</p>
                     <p class="text-sm text-slate-400"><strong>Potencial:</strong> Brasil visto como líder regional, com empresas emergentes desenvolvendo soluções.</p>
                 </div>
                 <div x-show="activeTab === 'pilar4'" x-transition:enter="transition-opacity duration-500" x-transition:leave="transition-opacity duration-300" class="space-y-4">
                     <h3 class="text-2xl font-bold text-emerald-400">Pilar 4: Biotecnologia Industrial (O Motor Tecnológico)</h3>
-                    <p class="text-lg text-slate-200">O "motor" que permite os outros pilares. Foca no desenvolvimento e produção de microrganismos, enzimas e leveduras de alta performance para processos industriais.</p>
+                    <p class="text-base md:text-lg text-slate-200">O "motor" que permite os outros pilares. Foca no desenvolvimento e produção de microrganismos, enzimas e leveduras de alta performance para processos industriais.</p>
                     <p class="text-sm text-slate-400"><strong>Insight:</strong> 100% dependência dos Pilares 2 e 3. Players como IFF e Novonesis investem no eixo SP/PR.</p>
                 </div>
             </div>
@@ -136,7 +136,7 @@
                     <div class="border-t border-dashed border-red-500 pt-6">
                         <h3 class="text-xl font-bold text-red-400 mb-4">Insight Estratégico: O "Vale da Morte" da P&D</h3>
                         <p class="text-slate-300">A P&D e patentes são dominadas por <span class="font-bold text-cyan-400">Universidades Públicas</span>. A Embrapa, líder em pesquisa agro, não está no Top 50 geral de patentes. Empresas nacionais que comercializam as soluções não figuram no topo.</p>
-                        <p class="text-lg font-semibold text-white mt-4">Gargalo Crítico: Transferência de Tecnologia.</p>
+                        <p class="text-base md:text-lg font-semibold text-white mt-4">Gargalo Crítico: Transferência de Tecnologia.</p>
                     </div>
                 </div>
             </div>
@@ -223,7 +223,7 @@
             <div x-show="openModal" @click.away="openModal = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
                 <div class="bg-gray-800 rounded-xl shadow-2xl max-w-lg w-full p-8" @click.stop>
                     <h3 class="text-2xl font-bold text-emerald-400 mb-4" x-text="modalContent.title"></h3>
-                    <p class="text-lg text-slate-200" x-text="modalContent.text"></p>
+                    <p class="text-base md:text-lg text-slate-200" x-text="modalContent.text"></p>
                     <button @click="openModal = false" class="mt-6 bg-emerald-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-emerald-600 transition-colors">
                         Fechar
                     </button>
@@ -292,17 +292,17 @@
                 <div class="insight-box min-h-[200px]">
                     <div x-show="activeTimeline === 'h5'" x-transition:enter="transition-opacity duration-500" x-transition:leave="transition-opacity duration-300" class="space-y-4">
                         <h3 class="text-2xl font-bold text-emerald-400">Curto Prazo: Execução e Consolidação</h3>
-                        <p class="text-lg text-slate-200">Goiás consolida sua posição. Os marcos críticos são a operacionalização dos <span class="font-bold text-cyan-400">BioBancos do Cerrado (PI)</span> e a entrada em operação da <span class="font-bold text-cyan-400">planta E2G da Raízen</span> em Jataí.</p>
+                        <p class="text-base md:text-lg text-slate-200">Goiás consolida sua posição. Os marcos críticos são a operacionalização dos <span class="font-bold text-cyan-400">BioBancos do Cerrado (PI)</span> e a entrada em operação da <span class="font-bold text-cyan-400">planta E2G da Raízen</span> em Jataí.</p>
                         <p class="text-sm text-slate-400"><strong>Resultado:</strong> Goiás se torna o principal *case* de bioeconomia integrada do Brasil.</p>
                     </div>
                     <div x-show="activeTimeline === 'h10'" x-transition:enter="transition-opacity duration-500" x-transition:leave="transition-opacity duration-300" class="space-y-4">
                         <h3 class="text-2xl font-bold text-emerald-400">Médio Prazo: Escala e Diversificação</h3>
-                        <p class="text-lg text-slate-200">O estado se torna um <span class="font-bold text-cyan-400">produtor líquido de bioinsumos</span>, usando a PI local dos BioBancos. O cluster de Bioenergia (E2G, Biometano) atinge a maturidade.</p>
+                        <p class="text-base md:text-lg text-slate-200">O estado se torna um <span class="font-bold text-cyan-400">produtor líquido de bioinsumos</span>, usando a PI local dos BioBancos. O cluster de Bioenergia (E2G, Biometano) atinge a maturidade.</p>
                         <p class="text-sm text-slate-400"><strong>Sinal Fraco (Oportunidade):</strong> Investimentos em Bioplásticos (Pilar 3) e SAF (Pilar 2) via rota Etanol-para-Jato.</p>
                     </div>
                     <div x-show="activeTimeline === 'h20'" x-transition:enter="transition-opacity duration-500" x-transition:leave="transition-opacity duration-300" class="space-y-4">
                         <h3 class="text-2xl font-bold text-emerald-400">Longo Prazo: Liderança e Soberania</h3>
-                        <p class="text-lg text-slate-200">Alinhado ao Cenário 3 (Desejável), Goiás se torna um <span class="font-bold text-cyan-400">Hub Global de Bioeconomia Tropical</span>. O estado exporta grãos, E2G, SAF e, o mais importante, <span class="font-bold text-cyan-400">patentes de microrganismos</span>.</p>
+                        <p class="text-base md:text-lg text-slate-200">Alinhado ao Cenário 3 (Desejável), Goiás se torna um <span class="font-bold text-cyan-400">Hub Global de Bioeconomia Tropical</span>. O estado exporta grãos, E2G, SAF e, o mais importante, <span class="font-bold text-cyan-400">patentes de microrganismos</span>.</p>
                         <p class="text-sm text-slate-400"><strong>Resultado:</strong> Um ciclo virtuoso de inovação que atrai P&D de multinacionais.</p>
                     </div>
                 </div>
@@ -340,18 +340,18 @@
                 <div class="md:col-span-2 insight-box min-h-[300px]">
                     <div x-show="activeSpillover === 'pharma'" x-transition:enter="transition-opacity duration-500" x-transition:leave="transition-opacity duration-300" class="space-y-4">
                         <h3 class="text-2xl font-bold text-emerald-400">Impacto no Setor Farmacêutico</h3>
-                        <p class="text-lg text-slate-200"><strong>Oportunidade 1 (Infraestrutura):</strong> A plataforma de biotecnologia (Pilar 4) usada para E2G é a *mesma* (fermentação, purificação) necessária para <span class="font-bold text-cyan-400">produção de Biossimilares</span>, fortalecendo a cadeia nacional de IFAs biológicos.</p>
-                        <p class="text-lg text-slate-200"><strong>Oportunidade 2 (P&D):</strong> Os <span class="font-bold text-cyan-400">BioBancos (como o de Goiás)</span> e a P&D em genômica criam, pela firsta vez, um sistema organizado para a <span class="font-bold text-cyan-400">bioprospecção legal</span> e eficiente da biodiversidade para novos fármacos.</p>
+                        <p class="text-base md:text-lg text-slate-200"><strong>Oportunidade 1 (Infraestrutura):</strong> A plataforma de biotecnologia (Pilar 4) usada para E2G é a *mesma* (fermentação, purificação) necessária para <span class="font-bold text-cyan-400">produção de Biossimilares</span>, fortalecendo a cadeia nacional de IFAs biológicos.</p>
+                        <p class="text-base md:text-lg text-slate-200"><strong>Oportunidade 2 (P&D):</strong> Os <span class="font-bold text-cyan-400">BioBancos (como o de Goiás)</span> e a P&D em genômica criam, pela firsta vez, um sistema organizado para a <span class="font-bold text-cyan-400">bioprospecção legal</span> e eficiente da biodiversidade para novos fármacos.</p>
                     </div>
                     <div x-show="activeSpillover === 'food'" x-transition:enter="transition-opacity duration-500" x-transition:leave="transition-opacity duration-300" class="space-y-4">
                         <h3 class="text-2xl font-bold text-emerald-400">Impacto no Setor de Alimentos</h3>
-                        <p class="text-lg text-slate-200"><strong>Oportunidade 1 ("Clean Label"):</strong> A Biotecnologia (Pilar 4) é a *fábrica* de ingredientes "limpos". A fermentação e processos enzimáticos criarão <span class="font-bold text-cyan-400">conservantes, corantes e aromatizantes naturais</span>, substituindo aditivos químicos.</p>
-                        <p class="text-lg text-slate-200"><strong>Oportunidade 2 (Marketing):</strong> O uso de Bioinsumos (Pilar 1) permite à indústria usar a rastreabilidade para agregar valor, provando que η matéria-prima é <span class="font-bold text-cyan-400">"livre de resíduos químicos"</span>.</p>
+                        <p class="text-base md:text-lg text-slate-200"><strong>Oportunidade 1 ("Clean Label"):</strong> A Biotecnologia (Pilar 4) é a *fábrica* de ingredientes "limpos". A fermentação e processos enzimáticos criarão <span class="font-bold text-cyan-400">conservantes, corantes e aromatizantes naturais</span>, substituindo aditivos químicos.</p>
+                        <p class="text-base md:text-lg text-slate-200"><strong>Oportunidade 2 (Marketing):</strong> O uso de Bioinsumos (Pilar 1) permite à indústria usar a rastreabilidade para agregar valor, provando que η matéria-prima é <span class="font-bold text-cyan-400">"livre de resíduos químicos"</span>.</p>
                     </div>
                     <div x-show="activeSpillover === 'cosmetics'" x-transition:enter="transition-opacity duration-500" x-transition:leave="transition-opacity duration-300" class="space-y-4">
                         <h3 class="text-2xl font-bold text-emerald-400">Impacto no Setor de Cosméticos</h3>
-                        <p class="text-lg text-slate-200"><strong>Oportunidade 1 ("Clean Beauty"):</strong> A Biotecnologia (Pilar 4) fornecerá os novos <span class="font-bold text-cyan-400">bioativos "verdes"</span> (ex: esqualano de cana, extratos fermentados), substituindo petroquímicos e atendendo à demanda do consumidor.</p>
-                        <p class="text-lg text-slate-200"><strong>Oportunidade 2 (ESG Total):</strong> O Pilar 3 (Bioplásticos) resolve o paradoxo da indústria, permitindo uma proposta de valor completa: <span class="font-bold text-cyan-400">produto "clean" em embalagem "bio"</span>.</p>
+                        <p class="text-base md:text-lg text-slate-200"><strong>Oportunidade 1 ("Clean Beauty"):</strong> A Biotecnologia (Pilar 4) fornecerá os novos <span class="font-bold text-cyan-400">bioativos "verdes"</span> (ex: esqualano de cana, extratos fermentados), substituindo petroquímicos e atendendo à demanda do consumidor.</p>
+                        <p class="text-base md:text-lg text-slate-200"><strong>Oportunidade 2 (ESG Total):</strong> O Pilar 3 (Bioplásticos) resolve o paradoxo da indústria, permitindo uma proposta de valor completa: <span class="font-bold text-cyan-400">produto "clean" em embalagem "bio"</span>.</p>
                     </div>
                 </div>
             </div>
@@ -361,13 +361,13 @@
         <section class="scroll-reveal">
             <h2 class="section-title text-center">Conclusão Estratégica</h2>
             <div class="insight-box text-center">
-                <p class="text-2xl text-slate-200 leading-relaxed max-w-3xl mx-auto">
+                <p class="text-xl md:text-2xl text-slate-200 leading-relaxed max-w-3xl mx-auto">
                     A corrida global pela bioeconomia já começou. A análise de foresight mostra que o Brasil tem os dois componentes essenciais: <span class="font-bold text-emerald-400">biomassa</span> (Centro-Oeste) e <span class="font-bold text-cyan-400">biotecnologia</span> (Sul/Sudeste).
                 </p>
-                <p class="text-3xl font-extrabold text-white my-6 max-w-3xl mx-auto">
+                <p class="text-2xl md:text-3xl font-extrabold text-white my-6 max-w-3xl mx-auto">
                     O futuro desejável (Cenário 3) não depende de uma nova invenção, mas de <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-500">Integração, Regulação Ágil e Capital Paciente.</span>
                 </p>
-                <p class="text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto">
+                <p class="text-lg md:text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto">
                     Goiás não está esperando o futuro; está construindo um "playbook" para ele.
                 </p>
             </div>
@@ -470,6 +470,7 @@
                             },
                             options: {
                                 responsive: true,
+                                maintainAspectRatio: false, // <-- ADICIONADO
                                 indexAxis: 'y', // Gráfico de barras horizontais
                                 plugins: {
                                     legend: { display: false },
@@ -536,6 +537,7 @@
                             },
                             options: {
                                 responsive: true,
+                                maintainAspectRatio: false, // <-- ADICIONADO
                                 scales: {
                                     x: {
                                         min: -10, max: 10,
