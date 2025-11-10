@@ -3,21 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
     <title>Foresight: O Futuro das Biosoluções</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- 
-      FIX:
-      1. Scripts de biblioteca movidos DE VOLTA para o <head>.
-      2. 'defer' foi REMOVIDO para forçar o carregamento síncrono e
-         na ordem correta, antes do 'DOMContentLoaded'.
-      3. URL do Chart.js revertida para a versão 'umd' por segurança.
+      FIX: Scripts movidos para o final do <body> para
+      uma execução síncrona e para corrigir o erro de 'helpers'.
     -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
@@ -43,6 +37,20 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Animação de Pulsação Suave Customizada */
+        @keyframes subtle-pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        .animate-subtle-pulse {
+            animation: subtle-pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
     </style>
 
 </head>
@@ -50,11 +58,12 @@
 <body x-data="{ activeTab: 'pilar1', activeTimeline: 'h5', activeSpillover: 'pharma', showScrollTop: false }" @scroll.window="showScrollTop = (window.pageYOffset > 400)">
 
     <!-- Cabeçalho -->
-    <header class="py-12 text-center sticky top-0 bg-gradient-to-b from-slate-900 via-slate-900 to-transparent z-50">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4">
+    <!-- FIX: Padding e tamanhos de fonte reduzidos para mobile -->
+    <header class="py-8 md:py-12 text-center sticky top-0 bg-gradient-to-b from-slate-900 via-slate-900 to-transparent z-50">
+        <h1 class="text-3xl md:text-6xl font-extrabold text-white mb-4">
             Foresight Estratégico
         </h1>
-        <h2 class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-500">
+        <h2 class="text-xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-500">
             O Futuro das Biosoluções no Brasil
         </h2>
         <p class="text-base md:text-lg text-slate-300 mt-2 max-w-2xl mx-auto">
@@ -75,16 +84,17 @@
             
             <!-- Abas Interativas dos Pilares -->
             <div class="flex flex-wrap justify-center gap-4 mb-8">
-                <button @click="activeTab = 'pilar1'" :class="{ 'bg-emerald-500 text-white': activeTab === 'pilar1', 'bg-gray-800 text-slate-300 hover:bg-gray-700': activeTab !== 'pilar1' }" class="px-6 py-3 font-semibold rounded-lg shadow-md transition-all duration-300">
+                <!-- FIX: Adicionado hover:scale-105 e transition-transform -->
+                <button @click="activeTab = 'pilar1'" :class="{ 'bg-emerald-500 text-white': activeTab === 'pilar1', 'bg-gray-800 text-slate-300 hover:bg-gray-700': activeTab !== 'pilar1' }" class="px-6 py-3 font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">
                     Pilar 1: Bioinsumos
                 </button>
-                <button @click="activeTab = 'pilar2'" :class="{ 'bg-emerald-500 text-white': activeTab === 'pilar2', 'bg-gray-800 text-slate-300 hover:bg-gray-700': activeTab !== 'pilar2' }" class="px-6 py-3 font-semibold rounded-lg shadow-md transition-all duration-300">
+                <button @click="activeTab = 'pilar2'" :class="{ 'bg-emerald-500 text-white': activeTab === 'pilar2', 'bg-gray-800 text-slate-300 hover:bg-gray-700': activeTab !== 'pilar2' }" class="px-6 py-3 font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">
                     Pilar 2: Biocombustíveis Avançados
                 </button>
-                <button @click="activeTab = 'pilar3'" :class="{ 'bg-emerald-500 text-white': activeTab === 'pilar3', 'bg-gray-800 text-slate-300 hover:bg-gray-700': activeTab !== 'pilar3' }" class="px-6 py-3 font-semibold rounded-lg shadow-md transition-all duration-300">
+                <button @click="activeTab = 'pilar3'" :class="{ 'bg-emerald-500 text-white': activeTab === 'pilar3', 'bg-gray-800 text-slate-300 hover:bg-gray-700': activeTab !== 'pilar3' }" class="px-6 py-3 font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">
                     Pilar 3: Bioplásticos e Bioquímicos
                 </button>
-                <button @click="activeTab = 'pilar4'" :class="{ 'bg-emerald-500 text-white': activeTab === 'pilar4', 'bg-gray-800 text-slate-300 hover:bg-gray-700': activeTab !== 'pilar4' }" class="px-6 py-3 font-semibold rounded-lg shadow-md transition-all duration-300">
+                <button @click="activeTab = 'pilar4'" :class="{ 'bg-emerald-500 text-white': activeTab === 'pilar4', 'bg-gray-800 text-slate-300 hover:bg-gray-700': activeTab !== 'pilar4' }" class="px-6 py-3 font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">
                     Pilar 4: Biotecnologia Industrial
                 </button>
             </div>
@@ -136,7 +146,8 @@
                     <div class="border-t border-dashed border-red-500 pt-6">
                         <h3 class="text-xl font-bold text-red-400 mb-4">Insight Estratégico: O "Vale da Morte" da P&D</h3>
                         <p class="text-slate-300">A P&D e patentes são dominadas por <span class="font-bold text-cyan-400">Universidades Públicas</span>. A Embrapa, líder em pesquisa agro, não está no Top 50 geral de patentes. Empresas nacionais que comercializam as soluções não figuram no topo.</p>
-                        <p class="text-base md:text-lg font-semibold text-white mt-4">Gargalo Crítico: Transferência de Tecnologia.</p>
+                        <!-- FIX: Adicionado animate-pulse para destacar o gargalo -->
+                        <p class="text-base md:text-lg font-semibold text-white mt-4 animate-pulse">Gargalo Crítico: Transferência de Tecnologia.</p>
                     </div>
                 </div>
             </div>
@@ -186,27 +197,28 @@
 
             <!-- Lista Interativa do Ecossistema (Mobile) -->
             <div class="space-y-4 md:hidden">
-                <button @click="openModal = true; modalContent = { title: '1. Política e Governança', text: 'Estabelecimento do Programa Estadual de Bioinsumos e incentivos fiscais claros para biogás e agroindústrias.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700">
+                <!-- FIX: Adicionado hover:scale-105 e transition-transform -->
+                <button @click="openModal = true; modalContent = { title: '1. Política e Governança', text: 'Estabelecimento do Programa Estadual de Bioinsumos e incentivos fiscais claros para biogás e agroindústrias.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700 transform hover:scale-105">
                     <span class="font-semibold text-lg text-emerald-400">1. Política e Governança</span>
                     <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                 </button>
-                <button @click="openModal = true; modalContent = { title: '2. Infraestrutura de P&D', text: 'Criação do Centro de Excelência em Bioinsumos (Cebio), um hub focado em controle biológico e rastreabilidade.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700">
+                <button @click="openModal = true; modalContent = { title: '2. Infraestrutura de P&D', text: 'Criação do Centro de Excelência em Bioinsumos (Cebio), um hub focado em controle biológico e rastreabilidade.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700 transform hover:scale-105">
                     <span class="font-semibold text-lg text-emerald-400">2. Infraestrutura de P&D</span>
                     <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                 </button>
-                <button @click="openModal = true; modalContent = { title: '3. Soberania de PI', text: 'Implantação de BioBancos Regionais do Cerrado (meta 2026) para preservar microrganismos nativos e criar PI local.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700">
+                <button @click="openModal = true; modalContent = { title: '3. Soberania de PI', text: 'Implantação de BioBancos Regionais do Cerrado (meta 2026) para preservar microrganismos nativos e criar PI local.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700 transform hover:scale-105">
                     <span class="font-semibold text-lg text-emerald-400">3. Soberania de PI</span>
                     <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                 </button>
-                <button @click="openModal = true; modalContent = { title: '4. Capital Humano', text: 'Cebio Academy e especialização gratuita em Bioinsumos, formando mais de 300 pessoas/ano.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700">
+                <button @click="openModal = true; modalContent = { title: '4. Capital Humano', text: 'Cebio Academy e especialização gratuita em Bioinsumos, formando mais de 300 pessoas/ano.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700 transform hover:scale-105">
                     <span class="font-semibold text-lg text-emerald-400">4. Capital Humano</span>
                     <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                 </button>
-                <button @click="openModal = true; modalContent = { title: '5. Inovação Aplicada (U-E)', text: 'Polo Embrapii (PETAgro) no IF Goiano, focado em tecnologias de produção e armazenamento de grãos, em parceria com startups.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700">
+                <button @click="openModal = true; modalContent = { title: '5. Inovação Aplicada (U-E)', text: 'Polo Embrapii (PETAgro) no IF Goiano, focado em tecnologias de produção e armazenamento de grãos, em parceria com startups.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700 transform hover:scale-105">
                     <span class="font-semibold text-lg text-emerald-400">5. Inovação Aplicada (U-E)</span>
                     <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                 </button>
-                <button @click="openModal = true; modalContent = { title: '6. Atração de Âncoras', text: 'Investimento de R$ 1,2 Bilhão da Raízen para a maior planta de Etanol 2G (E2G) em Jataí, validando o cluster de &quot;deep tech&quot;.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700">
+                <button @click="openModal = true; modalContent = { title: '6. Atração de Âncoras', text: 'Investimento de R$ 1,2 Bilhão da Raízen para a maior planta de Etanol 2G (E2G) em Jataí, validando o cluster de &quot;deep tech&quot;.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700 transform hover:scale-105">
                     <span class="font-semibold text-lg text-emerald-400">6. Atração de Âncoras</span>
                     <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                 </button>
@@ -243,12 +255,14 @@
 
             <!-- Incertezas Críticas -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                <div class="insight-box text-center">
+                <!-- FIX: Adicionada animação customizada -->
+                <div class="insight-box text-center animate-subtle-pulse">
                     <h3 class="text-xl font-bold text-white mb-3">Incerteza Crítica 1 (Eixo X)</h3>
                     <p class="text-2xl font-semibold text-cyan-400">Velocidade Regulatória</p>
                     <p class="text-slate-300 mt-2">A regulação (MAPA, Anvisa, Ibama, SisGen) conseguirá acompanhar a velocidade da inovação (IA, CRISPR, BioSintética)?</p>
                 </div>
-                <div class="insight-box text-center">
+                <!-- FIX: Adicionada animação customizada -->
+                <div class="insight-box text-center animate-subtle-pulse" style="animation-delay: 1.2s;">
                     <h3 class="text-xl font-bold text-white mb-3">Incerteza Crítica 2 (Eixo Y)</h3>
                     <p class="text-2xl font-semibold text-cyan-400">Capital para "Deep Tech"</p>
                     <p class="text-slate-300 mt-2">O investimento fluirá apenas para o retorno rápido ("Shallow Tech" - Bioinsumos) ou terá paciência para financiar a "Deep Tech" (E2G, SAF, Bioplásticos)?</p>
@@ -417,32 +431,36 @@
 
     <!-- 
       FIX:
-      1. Scripts de biblioteca movidos para o <head>.
+      1. Scripts de biblioteca movidos para o FIM do <body>.
+      2. 'defer' removido.
+      3. O script principal virá logo após, sem 'DOMContentLoaded'.
+      Isso força a execução síncrona e na ordem correta.
     -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     
     <script>
-        // FIX: 'DOMContentLoaded' ADICIONADO DE VOLTA.
-        // O script agora espera que a página esteja totalmente carregada
-        // (e que os scripts no <head> tenham sido executados)
-        // antes de tentar criar os gráficos.
-        document.addEventListener('DOMContentLoaded', () => {
+        // FIX: 'DOMContentLoaded' REMOVIDO.
+        // O script agora executa imediatamente após as bibliotecas
+        // serem carregadas sincronamente.
         
-            // Verificação de segurança para garantir que os objetos existem
-            if (typeof Chart === 'undefined' || typeof ChartDataLabels === 'undefined') {
-                console.error('Chart.js or ChartDataLabels failed to load.');
-                // Se falhar, não tentamos executar o resto do código
-                // que depende deles.
-            } else {
+        // Verificação de segurança para garantir que os objetos existem
+        if (typeof Chart === 'undefined' || typeof ChartDataLabels === 'undefined') {
+            console.error('Chart.js or ChartDataLabels failed to load.');
+            // Se falhar, não tentamos executar o resto do código
+            // que depende deles.
+        } else {
 
-                // Configuração global para fontes e cores do Chart.js
-                    Chart.defaults.color = '#e2e8f0'; // Slate 200
-                    Chart.defaults.borderColor = '#334155'; // Slate 700
-                
-                    // Registra os plugins
-                    Chart.register(ChartDataLabels);
+            // Configuração global para fontes e cores do Chart.js
+                Chart.defaults.color = '#e2e8f0'; // Slate 200
+                Chart.defaults.borderColor = '#334155'; // Slate 700
+            
+                // Registra os plugins
+                Chart.register(ChartDataLabels);
 
-                    // Função para Gráfico de Adoção (Bloco 2)
-                    function renderAdoptionChart() {
+                // Função para Gráfico de Adoção (Bloco 2)
+                function renderAdoptionChart() {
                         const ctxAdoption = document.getElementById('adoptionChart');
                         if (!ctxAdoption) return;
 
@@ -629,7 +647,7 @@
                 
                 } // Fim do 'else'
             
-        }); // Fim do DOMContentLoaded
+        // Fim do script
     </script>
 </body>
 </html>
