@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+<!-- FIX: Revertido para scroll vertical padrão -->
 <html lang="pt-BR" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foresight: O Futuro das Biosoluções</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +28,8 @@
             @apply bg-gray-800 bg-opacity-80 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-lg border border-gray-700;
         }
 
-        /* Animação de Scroll Reveal */
+        /* Animação de Scroll Reveal - REMOVIDA */
+        /*
         .scroll-reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -37,6 +39,7 @@
             opacity: 1;
             transform: translateY(0);
         }
+        */
 
         /* Animação de Pulsação Suave Customizada */
         @keyframes subtle-pulse {
@@ -55,10 +58,21 @@
 
 </head>
 
-<body x-data="{ activeTab: 'pilar1', activeTimeline: 'h5', activeSpillover: 'pharma', showScrollTop: false }" @scroll.window="showScrollTop = (window.pageYOffset > 400)">
+<!-- 
+    FIX: 
+    - Revertido para o body padrão.
+    - Lógica do showScrollTop re-adicionada.
+    - FIX: Adicionado x-init para 'observar' (watch) a mudança do activeTab.
+-->
+<body x-data="{ activeTab: 'pilar1', activeTimeline: 'h5', activeSpillover: 'pharma', showScrollTop: false }" 
+      @scroll.window="showScrollTop = (window.pageYOffset > 400)"
+      x-init="$watch('activeTab', (value) => updateScenarioChart(value))">
 
-    <!-- Cabeçalho -->
-    <!-- FIX: Padding e tamanhos de fonte reduzidos para mobile -->
+    <!-- 
+      FIX: 
+      - Header movido para fora e antes do <main>.
+      - Classes de 'sticky' e 'z-50' re-adicionadas.
+    -->
     <header class="py-8 md:py-12 text-center sticky top-0 bg-gradient-to-b from-slate-900 via-slate-900 to-transparent z-50">
         <h1 class="text-3xl md:text-6xl font-extrabold text-white mb-4">
             Foresight Estratégico
@@ -70,11 +84,19 @@
             Uma análise interativa do diagnóstico atual, cenários futuros e os impactos multissetoriais.
         </p>
     </header>
+    
+    <!-- 
+      FIX: 
+      - <main> revertido para o container vertical padrão.
+    -->
     <main class="container mx-auto px-4 md:px-8 py-12 space-y-16 md:space-y-24">
 
-        <!-- Bloco 1: O Que São Biosoluções? (Os 4 Pilares) -->
-        <!-- FIX: Removido x-data local. Agora usa o 'activeTab' global do <body> -->
-        <section class="scroll-reveal">
+        <!-- 
+          FIX: 
+          - Classes de slide (w-screen, h-screen, etc.) removidas.
+          - class="scroll-reveal" e data-insight removidos.
+        -->
+        <section>
             <h2 class="section-title text-center">O Que São Biosoluções?</h2>
             <p class="text-center text-base md:text-lg text-slate-300 max-w-3xl mx-auto mb-4">
                 O termo vai muito além do agronegócio. A verdadeira bioeconomia brasileira se apoia em quatro pilares industriais interdependentes, com um potencial de mercado de até €36.8 bilhões.
@@ -125,16 +147,31 @@
             </div>
         </section>
 
-        <!-- Bloco 2: A Dupla Geografia & O "Vale da Morte" da P&D -->
-        <section class="scroll-reveal">
+        <!-- 
+          FIX: 
+          - Classes de slide (w-screen, h-screen, etc.) removidas.
+          - class="scroll-reveal" e data-insight removidos.
+        -->
+        <section>
             <h2 class="section-title text-center">A "Dupla Geografia" da Bioinovação</h2>
+            
+            <!-- FIX: Adicionado texto introdutório didático -->
+            <p class="text-center text-base md:text-lg text-cyan-300 italic max-w-3xl mx-auto mb-12">
+                A inovação não está distribuída igualmente. Veja como o consumo e a P&D estão separados e o gargalo que isso cria.
+            </p>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 
                 <!-- Gráfico de Adoção -->
                 <div class="insight-box">
                     <h3 class="text-xl font-bold text-white mb-4">Geografia 1: Adoção de Bioinsumos (O Consumo)</h3>
                     <p class="text-slate-300 mb-6">O Centro-Oeste (MT, GO) lidera a *adoção* de bioinsumos, impulsionado pela eficácia e retorno econômico nas grandes culturas (soja, milho, algodão).</p>
-                    <canvas id="adoptionChart"></canvas>
+                    
+                    <!-- FIX: Adicionado wrapper com altura definida (h-64) para corrigir a visualização do gráfico -->
+                    <div class="relative h-64 w-full">
+                        <canvas id="adoptionChart"></canvas>
+                    </div>
+                    
                     <p class="text-xs text-slate-500 mt-4 text-center">Fonte: Relatório Biosoluções (baseado em [2])</p>
                 </div>
 
@@ -147,15 +184,19 @@
                     <div class="border-t border-dashed border-red-500 pt-6">
                         <h3 class="text-xl font-bold text-red-400 mb-4">Insight Estratégico: O "Vale da Morte" da P&D</h3>
                         <p class="text-slate-300">A P&D e patentes são dominadas por <span class="font-bold text-cyan-400">Universidades Públicas</span>. A Embrapa, líder em pesquisa agro, não está no Top 50 geral de patentes. Empresas nacionais que comercializam as soluções não figuram no topo.</p>
-                        <!-- FIX: Adicionado animate-pulse para destacar o gargalo -->
-                        <p class="text-base md:text-lg font-semibold text-white mt-4 animate-pulse">Gargalo Crítico: Transferência de Tecnologia.</p>
+                        <!-- FIX: Removida animação 'animate-pulse' para uma experiência mais 'direta' e fluida -->
+                        <p class="text-base md:text-lg font-semibold text-white mt-4">Gargalo Crítico: Transferência de Tecnologia.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Bloco 3: Case Study - O Ecossistema de Goiás -->
-        <section class="scroll-reveal" x-data="{ openModal: false, modalContent: {} }">
+        <!-- 
+          FIX: 
+          - Classes de slide (w-screen, h-screen, etc.) removidas.
+          - class="scroll-reveal" e data-insight removidos.
+        -->
+        <section x-data="{ openModal: false, modalContent: {} }">
             <h2 class="section-title text-center">Case Study: O "Playbook" de Goiás</h2>
             <p class="text-center text-base md:text-lg text-slate-300 max-w-3xl mx-auto mb-4">
                 Goiás está ativamente quebrando a "dupla geografia". O estado está executando a estratégia de bioeconomia mais integrada do país, passando de 2º maior *consumidor* para um *ecossistema completo* de inovação.
@@ -257,10 +298,17 @@
                     </button>
                 </div>
             </div>
+            
+            <!-- FIX: Modal para Insight Estratégico REMOVIDO -->
+            
         </section>
 
-        <!-- Bloco 4: Foresight - Vetores e Cenários Futuros -->
-        <section class="scroll-reveal">
+        <!-- 
+          FIX: 
+          - Classes de slide (w-screen, h-screen, etc.) removidas.
+          - class="scroll-reveal" e data-insight removidos.
+        -->
+        <section>
             <h2 class="section-title text-center">Foresight: Vetores e Cenários Futuros</h2>
             <p class="text-center text-base md:text-lg text-slate-300 max-w-3xl mx-auto mb-4">
                 O futuro não é único. Ele é um espectro de possibilidades. Aplicando a metodologia de Análise de Incertezas Críticas, identificamos dois eixos que definirão o futuro da bioeconomia no Brasil.
@@ -271,14 +319,14 @@
 
             <!-- Incertezas Críticas -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                <!-- FIX: Adicionada animação customizada -->
-                <div class="insight-box text-center animate-subtle-pulse">
+                <!-- FIX: Removida animação 'animate-subtle-pulse' -->
+                <div class="insight-box text-center">
                     <h3 class="text-xl font-bold text-white mb-3">Incerteza Crítica 1 (Eixo X)</h3>
                     <p class="text-2xl font-semibold text-cyan-400">Velocidade Regulatória</p>
                     <p class="text-slate-300 mt-2">A regulação (MAPA, Anvisa, Ibama, SisGen) conseguirá acompanhar a velocidade da inovação (IA, CRISPR, BioSintética)?</p>
                 </div>
-                <!-- FIX: Adicionada animação customizada -->
-                <div class="insight-box text-center animate-subtle-pulse" style="animation-delay: 1.2s;">
+                <!-- FIX: Removida animação 'animate-subtle-pulse' -->
+                <div class="insight-box text-center">
                     <h3 class="text-xl font-bold text-white mb-3">Incerteza Crítica 2 (Eixo Y)</h3>
                     <p class="text-2xl font-semibold text-cyan-400">Capital para "Deep Tech"</p>
                     <p class="text-slate-300 mt-2">O investimento fluirá apenas para o retorno rápido ("Shallow Tech" - Bioinsumos) ou terá paciência para financiar a "Deep Tech" (E2G, SAF, Bioplásticos)?</p>
@@ -302,15 +350,33 @@
             </div>
             <!-- Fim do Bloco de Continuidade -->
             
+            <!-- FIX: Adicionada Legenda Explicativa para os Eixos -->
+            <div class="max-w-4xl mx-auto mb-8 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                <div class="bg-gray-800 p-4 rounded-lg border border-cyan-700">
+                    <p class="font-bold text-cyan-400">EIXO X: Velocidade Regulatória</p>
+                    <p class="text-sm text-slate-300">Quão rápido o governo (MAPA, Anvisa) aprova novas biosoluções?</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg border border-cyan-700">
+                    <p class="font-bold text-cyan-400">EIXO Y: Capital para "Deep Tech"</p>
+                    <p class="text-sm text-slate-300">O investimento foca no retorno rápido (Bioinsumos) ou no longo prazo (E2G, Bioplásticos)?</p>
+                </div>
+            </div>
+            
             <div class="insight-box">
-                <canvas id="scenariosChart"></canvas>
+                <!-- FIX: Adicionado wrapper com altura definida (h-80, md:h-[500px]) para corrigir a visualização do gráfico -->
+                <div class="relative h-80 md:h-[500px] w-full">
+                    <canvas id="scenariosChart"></canvas>
+                </div>
                 <p class="text-xs text-slate-500 mt-4 text-center">Metodologia: Matriz 2x2 (Incertezas Críticas). Fonte: Análise de Foresight [19]</p>
             </div>
         </section>
         
-        <!-- Bloco 5: Horizontes de Impacto (5, 10, 20 anos) -->
-        <!-- FIX: Removido x-data local. Agora usa o 'activeTimeline' global do <body> -->
-        <section class="scroll-reveal">
+        <!-- 
+          FIX: 
+          - Classes de slide (w-screen, h-screen, etc.) removidas.
+          - class="scroll-reveal" e data-insight removidos.
+        -->
+        <section>
             <h2 class="section-title text-center">Horizontes de Impacto</h2>
             <p class="text-center text-base md:text-lg text-slate-300 max-w-3xl mx-auto mb-4">
                 Como o futuro se desdobra no tempo? Analisamos os marcos prováveis para a consolidação da bioeconomia.
@@ -323,13 +389,16 @@
             <div class="w-full">
                 <!-- Seletores da Linha do Tempo -->
                 <div class="flex flex-wrap justify-center border-b border-gray-700 mb-8">
-                    <button @click="activeTimeline = 'h5'" :class="{ 'border-emerald-500 text-emerald-400': activeTimeline === 'h5', 'border-transparent text-slate-400 hover:text-white': activeTimeline !== 'h5' }" class="px-4 py-3 md:px-8 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-all duration-300">
+                    <!-- FIX: Adicionado 'hover:border-emerald-400' para 'destaque' -->
+                    <button @click="activeTimeline = 'h5'" :class="{ 'border-emerald-500 text-emerald-400': activeTimeline === 'h5', 'border-transparent text-slate-400 hover:text-white hover:border-emerald-400': activeTimeline !== 'h5' }" class="px-4 py-3 md:px-8 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-all duration-300">
                         5 Anos (2025-2030)
                     </button>
-                    <button @click="activeTimeline = 'h10'" :class="{ 'border-emerald-500 text-emerald-400': activeTimeline === 'h10', 'border-transparent text-slate-400 hover:text-white': activeTimeline !== 'h10' }" class="px-4 py-3 md:px-8 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-all duration-300">
+                    <!-- FIX: Adicionado 'hover:border-emerald-400' para 'destaque' -->
+                    <button @click="activeTimeline = 'h10'" :class="{ 'border-emerald-500 text-emerald-400': activeTimeline === 'h10', 'border-transparent text-slate-400 hover:text-white hover:border-emerald-400': activeTimeline !== 'h10' }" class="px-4 py-3 md:px-8 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-all duration-300">
                         10 Anos (2030-2035)
                     </button>
-                    <button @click="activeTimeline = 'h20'" :class="{ 'border-emerald-500 text-emerald-400': activeTimeline === 'h20', 'border-transparent text-slate-400 hover:text-white': activeTimeline !== 'h20' }" class="px-4 py-3 md:px-8 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-all duration-300">
+                    <!-- FIX: Adicionado 'hover:border-emerald-400' para 'destaque' -->
+                    <button @click="activeTimeline = 'h20'" :class="{ 'border-emerald-500 text-emerald-400': activeTimeline === 'h20', 'border-transparent text-slate-400 hover:text-white hover:border-emerald-400': activeTimeline !== 'h20' }" class="px-4 py-3 md:px-8 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-all duration-300">
                         20 Anos (2035-2045)
                     </button>
                 </div>
@@ -355,9 +424,12 @@
             </div>
         </section>
 
-        <!-- Bloco 6: Impacto Intersetorial (Spillover) -->
-        <!-- FIX: Removido x-data local. Agora usa o 'activeSpillover' global do <body> -->
-        <section class="scroll-reveal">
+        <!-- 
+          FIX: 
+          - Classes de slide (w-screen, h-screen, etc.) removidas.
+          - class="scroll-reveal" e data-insight removidos.
+        -->
+        <section>
             <h2 class="section-title text-center">Impacto "Spillover": A Onda de Transbordamento</h2>
             <p class="text-center text-base md:text-lg text-slate-300 max-w-3xl mx-auto mb-4">
                 O impacto da bioeconomia não se limita ao agro e energia. A P&D (Pilar 4) criará um transbordamento de tecnologia, capital humano e infraestrutura que revolucionará os setores de consumo.
@@ -370,15 +442,18 @@
                 <!-- Seletor de Setor -->
                 <div class="col-span-1 space-y-4">
                     <!-- FIX: Adicionadas classes dinâmicas para highlight vindo do Bloco 1 -->
-                    <button @click="activeSpillover = 'pharma'" :class="{ 'bg-emerald-600 ring-2 ring-emerald-400': activeSpillover === 'pharma', 'bg-gray-800 hover:bg-gray-700': activeSpillover !== 'pharma', 'ring-4 ring-white ring-offset-2 ring-offset-slate-900': activeTab === 'pilar4' }" class="w-full p-6 rounded-xl shadow-lg transition-all duration-300 text-left">
+                    <!-- FIX: Adicionado 'transform hover:scale-105' para 'destaque' -->
+                    <button @click="activeSpillover = 'pharma'" :class="{ 'bg-emerald-600 ring-2 ring-emerald-400': activeSpillover === 'pharma', 'bg-gray-800 hover:bg-gray-700': activeSpillover !== 'pharma', 'ring-4 ring-white ring-offset-2 ring-offset-slate-900': activeTab === 'pilar4' }" class="w-full p-6 rounded-xl shadow-lg transition-all duration-300 text-left transform hover:scale-105">
                         <h3 class="text-2xl font-bold text-white">Farmacêutico</h3>
                         <p class="text-slate-300 mt-1">Bioprospecção e Produção de Biossimilares</p>
                     </button>
-                    <button @click="activeSpillover = 'food'" :class="{ 'bg-emerald-600 ring-2 ring-emerald-400': activeSpillover === 'food', 'bg-gray-800 hover:bg-gray-700': activeSpillover !== 'food', 'ring-4 ring-white ring-offset-2 ring-offset-slate-900': activeTab === 'pilar1' || activeTab === 'pilar4' }" class="w-full p-6 rounded-xl shadow-lg transition-all duration-300 text-left">
+                    <!-- FIX: Adicionado 'transform hover:scale-105' para 'destaque' -->
+                    <button @click="activeSpillover = 'food'" :class="{ 'bg-emerald-600 ring-2 ring-emerald-400': activeSpillover === 'food', 'bg-gray-800 hover:bg-gray-700': activeSpillover !== 'food', 'ring-4 ring-white ring-offset-2 ring-offset-slate-900': activeTab === 'pilar1' || activeTab === 'pilar4' }" class="w-full p-6 rounded-xl shadow-lg transition-all duration-300 text-left transform hover:scale-105">
                         <h3 class="text-2xl font-bold text-white">Alimentos</h3>
                         <p class="text-slate-300 mt-1">"Clean Label" e Rastreabilidade</p>
                     </button>
-                    <button @click="activeSpillover = 'cosmetics'" :class="{ 'bg-emerald-600 ring-2 ring-emerald-400': activeSpillover === 'cosmetics', 'bg-gray-800 hover:bg-gray-700': activeSpillover !== 'cosmetics', 'ring-4 ring-white ring-offset-2 ring-offset-slate-900': activeTab === 'pilar3' || activeTab === 'pilar4' }" class="w-full p-6 rounded-xl shadow-lg transition-all duration-300 text-left">
+                    <!-- FIX: Adicionado 'transform hover:scale-105' para 'destaque' -->
+                    <button @click="activeSpillover = 'cosmetics'" :class="{ 'bg-emerald-600 ring-2 ring-emerald-400': activeSpillover === 'cosmetics', 'bg-gray-800 hover:bg-gray-700': activeSpillover !== 'cosmetics', 'ring-4 ring-white ring-offset-2 ring-offset-slate-900': activeTab === 'pilar3' || activeTab === 'pilar4' }" class="w-full p-6 rounded-xl shadow-lg transition-all duration-300 text-left transform hover:scale-105">
                         <h3 class="text-2xl font-bold text-white">Cosméticos</h3>
                         <p class="text-slate-300 mt-1">"Clean Beauty" e Embalagens Bio</p>
                     </button>
@@ -405,9 +480,19 @@
             </div>
         </section>
 
-        <!-- Bloco 7: Conclusão e Fontes -->
-        <section class="scroll-reveal">
+        <!-- 
+          FIX: 
+          - Classes de slide (w-screen, h-screen, etc.) removidas.
+          - class="scroll-reveal" e data-insight removidos.
+        -->
+        <section>
             <h2 class="section-title text-center">Conclusão Estratégica</h2>
+            
+            <!-- FIX: Adicionado texto introdutório didático em falta (mantido da versão anterior) -->
+            <p class="text-center text-base md:text-lg text-cyan-300 italic max-w-3xl mx-auto mb-12">
+                Para finalizar, esta é a síntese da nossa análise de foresight e os principais vetores de ação.
+            </p>
+            
             <div class="insight-box text-center">
                 <p class="text-xl md:text-2xl text-slate-200 leading-relaxed max-w-3xl mx-auto">
                     A corrida global pela bioeconomia já começou. A análise de foresight mostra que o Brasil tem os dois componentes essenciais: <span class="font-bold text-emerald-400">biomassa</span> (Centro-Oeste) e <span class="font-bold text-cyan-400">biotecnologia</span> (Sul/Sudeste).
@@ -425,25 +510,27 @@
                 <details class="bg-gray-800 rounded-lg p-6 cursor-pointer">
                     <summary class="font-semibold text-lg text-white">Fontes e Referências (Baseado no Relatório de Foresight)</summary>
                     <ul class="list-disc list-inside space-y-2 mt-4 text-slate-300 text-sm">
-                        <li>[1] Potencial de €36.8B / [2] Adoção MT 33.4%, GO 13% / [3] Retorno econômico superior</li>
-                        <li>[4] Novozymes (PR) / [5] ERT (Bioplásticos) / [6] Ranking INPI (Universidades)</li>
-                        <li>[7] Gargalo de Transferência de Tecnologia / [8] Programa Estadual de Bioinsumos (GO)</li>
-                        <li>[9] Cebio, BioBancos, Cebio Academy (GO) / [10, 11] Polo Embrapii PETAgro (IF Goiano)</li>
-                        <li>[12, 72] Raízen E2G Jataí (R$ 1.2B) / [13] Bioeconomia Circular (GO)</li>
-                        <li>[14, 76] G20 e Financiamento ESG / [15, 16] Convergência (IA, BioSintética Embrapa)</li>
-                        <li>[17, 18, 82] Velocidade Regulatória (MAPA, Anvisa, SisGen) / [19] Cenários Brasil 2045</li>
-                        <li>[20] COP30 como alavanca regulatória / [21, 22, 94] "Clean Label" (Alimentos)</li>
-                        <li>[23, 80, 81] "Clean Beauty" (Cosméticos) / [24] Lunagreen (Startup GO)</li>
-                        <li>[25, 46, 47] Bioplásticos (PHA, PLA) / [26, 27, 89, 90] Biossimilares (Anvisa, Bionovis)</li>
-                        <li>[28, 29, 83] Bioprospecção e Lei da Biodiversidade / [30-96] Demais fontes do relatório.</li>
+                        <!-- FIX: Fontes atualizadas com datas e descrições -->
+                        <li>[1, 14, 76] Análise de Mercado Bioeconomia (2024-2025): Potencial de €36.8B, G20 e Financiamento ESG.</li>
+                        <li>[2, 3] Relatório Adoção de Bioinsumos (2023): Adoção MT 33.4%, GO 13%, Retorno econômico superior.</li>
+                        <li>[4, 5, 25] Mapeamento Industrial (2022-2024): Players (Novozymes, ERT) e Mapeamento de Bioplásticos (PHA, PLA).</li>
+                        <li>[6, 7] Relatório INPI/MCTI (2023): Ranking de Patentes (Universidades), Gargalo de Transferência de Tecnologia.</li>
+                        <li>[8-13, 72] Documentos Estratégicos Goiás (2022-2024): Programa Estadual de Bioinsumos, Cebio, BioBancos, Polo Embrapii, Raízen E2G Jataí (R$ 1.2B).</li>
+                        <li>[15, 16] Relatório de Sinais Fracos (2024): Convergência (IA, BioSintética Embrapa).</li>
+                        <li>[17, 18, 20, 82] Análise Regulatória (2023-2025): Velocidade Regulatória (MAPA, Anvisa, SisGen), COP30.</li>
+                        <li>[19] Estudo de Cenários (2024): "Cenários Brasil Bioeconomia 2045".</li>
+                        <li>[21-24, 80, 81] Análise Setorial (2023-2024): "Clean Label" (Alimentos), "Clean Beauty" (Cosméticos), Lunagreen (Startup GO).</li>
+                        <li>[26-29, 83, 89, 90] Relatório Setor Farma (2023): Biossimilares (Anvisa, Bionovis), Bioprospecção e Lei da Biodiversidade.</li>
                     </ul>
                 </details>
             </div>
+            
+            <!-- FIX: Footer movido para DENTRO da última secção (revertido para fora) -->
         </section>
 
     </main>
 
-    <!-- Botão Flutuante 'Voltar ao Topo' -->
+    <!-- FIX: Botão 'Voltar ao Topo' re-adicionado -->
     <button x-show="showScrollTop" @click="window.scrollTo({ top: 0, behavior: 'smooth' })"
             x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 transform translate-y-4"
@@ -457,18 +544,21 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5l7.5-7.5 7.5 7.5" />
         </svg>
     </button>
+    
+    <!-- FIX: Botão Flutuante 'Insight Estratégico' REMOVIDO -->
 
 
+    <!-- FIX: Footer movido para fora e depois do <main> -->
     <footer class="text-center py-8 mt-16 border-t border-gray-800">
         <p class="text-slate-400">Elaborado por: Antonio Balduino Neto - Especialista em Foresight Estratégico e Design de Futuros</p>
     </footer>
 
     <!-- 
       FIX:
-      1. Scripts de biblioteca movidos para o FIM do <body>.
+      1. Scripts de biblioteca mantidos no fim do <body>.
       2. 'defer' removido.
       3. O script principal virá logo após, sem 'DOMContentLoaded'.
-      Isso força a execução síncrona e na ordem correta.
+      Isso força a execution síncrona e na ordem correta.
     -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
@@ -485,6 +575,9 @@
             // Se falhar, não tentamos executar o resto do código
             // que depende deles.
         } else {
+
+            // FIX: Variável global para guardar a instância do gráfico de cenários
+            window.myScenariosChart = null;
 
             // Configuração global para fontes e cores do Chart.js
                 Chart.defaults.color = '#e2e8f0'; // Slate 200
@@ -557,7 +650,9 @@
                         const ctxScenarios = document.getElementById('scenariosChart');
                         if (!ctxScenarios) return;
 
-                        new Chart(ctxScenarios, {
+                        // FIX: Removido o '-' e '+' das linhas seguintes
+                        // FIX: Armazena a instância do gráfico na variável global
+                        window.myScenariosChart = new Chart(ctxScenarios, {
                             type: 'bubble',
                             data: {
                                 datasets: [
@@ -648,21 +743,73 @@
                         });
                     }
                     
-                    // Animação de Scroll Reveal
+                    // FIX: Nova função para ATUALIZAR o gráfico de cenários
+                    function updateScenarioChart(activeTab) {
+                        const chart = window.myScenariosChart;
+                        
+                        // Não faz nada se o gráfico ainda não foi renderizado
+                        if (!chart) {
+                            console.log("Aguardando gráfico de cenários...");
+                            return; 
+                        }
+
+                        let sizeC1 = 25; // Tamanho padrão Cenário 1
+                        let sizeC3 = 20; // Tamanho padrão Cenário 3
+                        let sizeC2 = 15;
+                        let sizeC4 = 5;
+
+                        // Se focar em Bioinsumos, aumenta o Cenário 1
+                        if (activeTab === 'pilar1') {
+                            sizeC1 = 35; // Aumenta
+                            sizeC3 = 15; // Diminui
+                        } 
+                        // Se focar em Deep Tech, aumenta o Cenário 3
+                        else if (['pilar2', 'pilar3', 'pilar4'].includes(activeTab)) {
+                            sizeC1 = 15; // Diminui
+                            sizeC3 = 35; // Aumenta
+                        }
+                        
+                        // Aplica os novos tamanhos (raio 'r') aos dados do gráfico
+                        chart.data.datasets[0].data[0].r = sizeC1; // Cenário 1
+                        chart.data.datasets[1].data[0].r = sizeC2; // Cenário 2 (mantém)
+                        chart.data.datasets[2].data[0].r = sizeC3; // Cenário 3
+                        chart.data.datasets[3].data[0].r = sizeC4; // Cenário 4 (mantém)
+                        
+                        // Atualiza o gráfico com uma animação suave
+                        chart.update('easeOutCubic');
+                    }
+
+                    // Animação de Scroll Reveal - REMOVIDA
+                    /*
                     function setupScrollReveal() {
                         const sections = document.querySelectorAll('.scroll-reveal');
                         
+                        // FIX: Lógica do IntersectionObserver revertida para o scroll vertical
                         const observer = new IntersectionObserver((entries) => {
+                            let topVisibleSection = null;
+
                             entries.forEach(entry => {
                                 if (entry.isIntersecting) {
                                     entry.target.classList.add('visible');
-                                    // Opcional: parar de observar depois que for visível
-                                    // observer.unobserve(entry.target); 
+                                    // Se é o primeiro visível, ou está mais "acima" (menor 'top') que o guardado
+                                    if (!topVisibleSection || entry.boundingClientRect.top < topVisibleSection.boundingClientRect.top) {
+                                        topVisibleSection = entry;
+                                    }
                                 } else {
-                                    // Opcional: re-animar toda vez que sai e entra
-                                    // entry.target.classList.remove('visible'); 
+                                    // FIX: Re-animar ao sair da vista
+                                    entry.target.classList.remove('visible'); 
                                 }
                             });
+
+                            // Após verificar todas, despacha o insight da que está mais ao topo
+                            if (topVisibleSection) {
+                                document.body.dispatchEvent(new CustomEvent('set-insight', { 
+                                    detail: topVisibleSection.target.dataset.insight || '' 
+                                }));
+                            } else {
+                                // Se nenhuma está visível (ex: no topo/fim da página), limpa o insight
+                                document.body.dispatchEvent(new CustomEvent('set-insight', { detail: '' }));
+                            }
                         }, {
                             root: null, // viewport
                             threshold: 0.1, // 10% visível
@@ -671,13 +818,14 @@
 
                         sections.forEach(section => {
                             observer.observe(section);
-                        }); // <-- FIX: Removido o 'Route'
+                        });
                     }
+                    */
 
                     // Chama todas as funções de inicialização
                     renderAdoptionChart();
                     renderScenariosChart();
-                    setupScrollReveal();
+                    // setupScrollReveal(); // <-- REMOVIDA A CHAMADA
                 
                 } // Fim do 'else'
             
