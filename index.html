@@ -47,7 +47,7 @@
 
 </head>
 
-<body x-data="{ activeTab: 'pilar1', activeTimeline: 'h5', activeSpillover: 'pharma' }">
+<body x-data="{ activeTab: 'pilar1', activeTimeline: 'h5', activeSpillover: 'pharma', showScrollTop: false }" @scroll.window="showScrollTop = (window.pageYOffset > 400)">
 
     <!-- Cabeçalho -->
     <header class="py-12 text-center sticky top-0 bg-gradient-to-b from-slate-900 via-slate-900 to-transparent z-50">
@@ -57,19 +57,20 @@
         <h2 class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-500">
             O Futuro das Biosoluções no Brasil
         </h2>
-        <p class="text-lg text-slate-300 mt-2 max-w-2xl mx-auto">
+        <p class="text-base md:text-lg text-slate-300 mt-2 max-w-2xl mx-auto">
             Uma análise interativa do diagnóstico atual, cenários futuros e os impactos multissetoriais.
         </p>
     </header>
-
-    <!-- Corpo do Infográfico -->
-    <main class="container mx-auto px-4 md:px-8 py-12 space-y-24">
+    <main class="container mx-auto px-4 md:px-8 py-12 space-y-16 md:space-y-24">
 
         <!-- Bloco 1: O Que São Biosoluções? (Os 4 Pilares) -->
         <section class="scroll-reveal" x-data="{ activeTab: 'pilar1' }">
             <h2 class="section-title text-center">O Que São Biosoluções?</h2>
-            <p class="text-center text-lg text-slate-300 max-w-3xl mx-auto mb-12">
+            <p class="text-center text-base md:text-lg text-slate-300 max-w-3xl mx-auto mb-4">
                 O termo vai muito além do agronegócio. A verdadeira bioeconomia brasileira se apoia em quatro pilares industriais interdependentes, com um potencial de mercado de até €36.8 bilhões.
+            </p>
+            <p class="text-center text-base md:text-lg text-cyan-300 italic max-w-3xl mx-auto mb-12">
+                Abaixo, clique nos quatro pilares para explorar cada um.
             </p>
             
             <!-- Abas Interativas dos Pilares -->
@@ -144,12 +145,15 @@
         <!-- Bloco 3: Case Study - O Ecossistema de Goiás -->
         <section class="scroll-reveal" x-data="{ openModal: false, modalContent: {} }">
             <h2 class="section-title text-center">Case Study: O "Playbook" de Goiás</h2>
-            <p class="text-center text-lg text-slate-300 max-w-3xl mx-auto mb-12">
+            <p class="text-center text-base md:text-lg text-slate-300 max-w-3xl mx-auto mb-4">
                 Goiás está ativamente quebrando a "dupla geografia". O estado está executando a estratégia de bioeconomia mais integrada do país, passando de 2º maior *consumidor* para um *ecossistema completo* de inovação.
             </p>
+            <p class="text-center text-base md:text-lg text-cyan-300 italic max-w-3xl mx-auto mb-12">
+                No diagrama (ou lista, em dispositivos móveis) abaixo, clique em cada um dos 6 pontos para revelar os detalhes da estratégia.
+            </p>
             
-            <!-- Diagrama Interativo do Ecossistema -->
-            <div class="relative max-w-3xl mx-auto p-8">
+            <!-- Diagrama Interativo do Ecossistema (Desktop) -->
+            <div class="relative max-w-3xl mx-auto p-8 hidden md:block">
                 <!-- Círculo Central -->
                 <div class="absolute inset-0 flex items-center justify-center">
                     <div class="w-64 h-64 md:w-80 md:h-80 bg-gray-800 rounded-full flex items-center justify-center text-center p-4 shadow-xl">
@@ -179,6 +183,34 @@
                     </button>
                 </div>
             </div>
+
+            <!-- Lista Interativa do Ecossistema (Mobile) -->
+            <div class="space-y-4 md:hidden">
+                <button @click="openModal = true; modalContent = { title: '1. Política e Governança', text: 'Estabelecimento do Programa Estadual de Bioinsumos e incentivos fiscais claros para biogás e agroindústrias.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700">
+                    <span class="font-semibold text-lg text-emerald-400">1. Política e Governança</span>
+                    <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                </button>
+                <button @click="openModal = true; modalContent = { title: '2. Infraestrutura de P&D', text: 'Criação do Centro de Excelência em Bioinsumos (Cebio), um hub focado em controle biológico e rastreabilidade.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700">
+                    <span class="font-semibold text-lg text-emerald-400">2. Infraestrutura de P&D</span>
+                    <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                </button>
+                <button @click="openModal = true; modalContent = { title: '3. Soberania de PI', text: 'Implantação de BioBancos Regionais do Cerrado (meta 2026) para preservar microrganismos nativos e criar PI local.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700">
+                    <span class="font-semibold text-lg text-emerald-400">3. Soberania de PI</span>
+                    <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                </button>
+                <button @click="openModal = true; modalContent = { title: '4. Capital Humano', text: 'Cebio Academy e especialização gratuita em Bioinsumos, formando mais de 300 pessoas/ano.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700">
+                    <span class="font-semibold text-lg text-emerald-400">4. Capital Humano</span>
+                    <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                </button>
+                <button @click="openModal = true; modalContent = { title: '5. Inovação Aplicada (U-E)', text: 'Polo Embrapii (PETAgro) no IF Goiano, focado em tecnologias de produção e armazenamento de grãos, em parceria com startups.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700">
+                    <span class="font-semibold text-lg text-emerald-400">5. Inovação Aplicada (U-E)</span>
+                    <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                </button>
+                <button @click="openModal = true; modalContent = { title: '6. Atração de Âncoras', text: 'Investimento de R$ 1,2 Bilhão da Raízen para a maior planta de Etanol 2G (E2G) em Jataí, validando o cluster de &quot;deep tech&quot;.' }" class="w-full text-left p-6 bg-gray-800 rounded-lg shadow-lg flex justify-between items-center transition-all duration-300 hover:bg-gray-700">
+                    <span class="font-semibold text-lg text-emerald-400">6. Atração de Âncoras</span>
+                    <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                </button>
+            </div>
             
             <!-- Estilos para os Nodos -->
             <style>
@@ -202,8 +234,11 @@
         <!-- Bloco 4: Foresight - Vetores e Cenários Futuros -->
         <section class="scroll-reveal">
             <h2 class="section-title text-center">Foresight: Vetores e Cenários Futuros</h2>
-            <p class="text-center text-lg text-slate-300 max-w-3xl mx-auto mb-12">
+            <p class="text-center text-base md:text-lg text-slate-300 max-w-3xl mx-auto mb-4">
                 O futuro não é único. Ele é um espectro de possibilidades. Aplicando a metodologia de Análise de Incertezas Críticas, identificamos dois eixos que definirão o futuro da bioeconomia no Brasil.
+            </p>
+            <p class="text-center text-base md:text-lg text-cyan-300 italic max-w-3xl mx-auto mb-12">
+                Passe o mouse (ou toque) nos quadrantes do gráfico para ver os detalhes de cada cenário.
             </p>
 
             <!-- Incertezas Críticas -->
@@ -231,21 +266,24 @@
         <!-- Bloco 5: Horizontes de Impacto (5, 10, 20 anos) -->
         <section class="scroll-reveal" x-data="{ activeTimeline: 'h5' }">
             <h2 class="section-title text-center">Horizontes de Impacto</h2>
-            <p class="text-center text-lg text-slate-300 max-w-3xl mx-auto mb-12">
+            <p class="text-center text-base md:text-lg text-slate-300 max-w-3xl mx-auto mb-4">
                 Como o futuro se desdobra no tempo? Analisamos os marcos prováveis para a consolidação da bioeconomia.
+            </p>
+            <p class="text-center text-base md:text-lg text-cyan-300 italic max-w-3xl mx-auto mb-12">
+                Selecione um período de tempo (5, 10 ou 20 anos) para ler a análise de impacto.
             </p>
 
             <!-- Linha do Tempo Interativa -->
             <div class="w-full">
                 <!-- Seletores da Linha do Tempo -->
-                <div class="flex justify-center border-b border-gray-700 mb-8">
-                    <button @click="activeTimeline = 'h5'" :class="{ 'border-emerald-500 text-emerald-400': activeTimeline === 'h5', 'border-transparent text-slate-400 hover:text-white': activeTimeline !== 'h5' }" class="px-8 py-4 font-bold text-lg border-b-4 transition-all duration-300">
+                <div class="flex flex-wrap justify-center border-b border-gray-700 mb-8">
+                    <button @click="activeTimeline = 'h5'" :class="{ 'border-emerald-500 text-emerald-400': activeTimeline === 'h5', 'border-transparent text-slate-400 hover:text-white': activeTimeline !== 'h5' }" class="px-4 py-3 md:px-8 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-all duration-300">
                         5 Anos (2025-2030)
                     </button>
-                    <button @click="activeTimeline = 'h10'" :class="{ 'border-emerald-500 text-emerald-400': activeTimeline === 'h10', 'border-transparent text-slate-400 hover:text-white': activeTimeline !== 'h10' }" class="px-8 py-4 font-bold text-lg border-b-4 transition-all duration-300">
+                    <button @click="activeTimeline = 'h10'" :class="{ 'border-emerald-500 text-emerald-400': activeTimeline === 'h10', 'border-transparent text-slate-400 hover:text-white': activeTimeline !== 'h10' }" class="px-4 py-3 md:px-8 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-all duration-300">
                         10 Anos (2030-2035)
                     </button>
-                    <button @click="activeTimeline = 'h20'" :class="{ 'border-emerald-500 text-emerald-400': activeTimeline === 'h20', 'border-transparent text-slate-400 hover:text-white': activeTimeline !== 'h20' }" class="px-8 py-4 font-bold text-lg border-b-4 transition-all duration-300">
+                    <button @click="activeTimeline = 'h20'" :class="{ 'border-emerald-500 text-emerald-400': activeTimeline === 'h20', 'border-transparent text-slate-400 hover:text-white': activeTimeline !== 'h20' }" class="px-4 py-3 md:px-8 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-all duration-300">
                         20 Anos (2035-2045)
                     </button>
                 </div>
@@ -274,8 +312,11 @@
         <!-- Bloco 6: Impacto Intersetorial (Spillover) -->
         <section class="scroll-reveal" x-data="{ activeSpillover: 'pharma' }">
             <h2 class="section-title text-center">Impacto "Spillover": A Onda de Transbordamento</h2>
-            <p class="text-center text-lg text-slate-300 max-w-3xl mx-auto mb-12">
+            <p class="text-center text-base md:text-lg text-slate-300 max-w-3xl mx-auto mb-4">
                 O impacto da bioeconomia não se limita ao agro e energia. A P&D (Pilar 4) criará um transbordamento de tecnologia, capital humano e infraestrutura que revolucionará os setores de consumo.
+            </p>
+            <p class="text-center text-base md:text-lg text-cyan-300 italic max-w-3xl mx-auto mb-12">
+                Clique nos setores à esquerda para descobrir como a bioeconomia irá transbordar para cada um.
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -353,6 +394,22 @@
         </section>
 
     </main>
+
+    <!-- Botão Flutuante 'Voltar ao Topo' -->
+    <button x-show="showScrollTop" @click="window.scrollTo({ top: 0, behavior: 'smooth' })"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform translate-y-4"
+            x-transition:enter-end="opacity-100 transform translate-y-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 transform translate-y-0"
+            x-transition:leave-end="opacity-0 transform translate-y-4"
+            class="fixed bottom-6 right-6 bg-emerald-500 text-white p-3 rounded-full shadow-lg hover:bg-emerald-600 transition-colors z-50">
+        <!-- Ícone SVG de Seta para Cima -->
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5l7.5-7.5 7.5 7.5" />
+        </svg>
+    </button>
+
 
     <footer class="text-center py-8 mt-16 border-t border-gray-800">
         <p class="text-slate-400">Elaborado por: Antonio Balduino Neto - Especialista em Foresight Estratégico e Design de Futuros</p>
